@@ -14,7 +14,7 @@ def main():
 
     ax_1.set_xlabel("Елементів ", fontsize=20)
     ax_1.set_ylabel("Операцій", fontsize=20)
-    ax_1.set_title("Шейкерна сортировка", fontsize=32)
+    ax_1.set_title("Шейкерне сортування", fontsize=32)
     ax_1.grid(which='major',
               color='k')
     ax_1.minorticks_on()
@@ -39,12 +39,12 @@ def main():
     canvas = FigureCanvasTkAgg(fig, root)
     canvas.get_tk_widget().pack()
     root.mainloop()
-    plt.savefig('graph1.png')
+    plt.savefig('graph1000.png')
 
 
 def getDataFromFile():
     try:
-        f = open(r"C:\Users\Carambula\Desktop\Учёба\АМО\SecondLab\Assets\Sort analyse.txt", "r")
+        f = open(r"C:\Users\Carambula\Desktop\Study\AMO\SecondLab\Assets\Sort analyse.txt", "r")
         data = f.read()
         f.close()
     except FileNotFoundError:
@@ -53,7 +53,7 @@ def getDataFromFile():
     tempList = data.split()
     listOfOper = list()
     listOfElem = list()
-    lim = int(len(tempList) / 1)
+    lim = int(len(tempList) / 1000)
     if lim % 2 == 1:
         lim -= 1
     for i in range(lim):

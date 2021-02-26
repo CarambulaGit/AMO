@@ -46,7 +46,6 @@ public class CanvasController : MonoBehaviour {
         var time = 0f;
         while (time < ERROR_MESSAGE_TIME) {
             errorImage.color = Color.Lerp(Color.red, Color.clear, time / ERROR_MESSAGE_TIME);
-            Debug.Log(Mathf.Lerp(5,6,5.5f));
             time += Time.deltaTime;
             yield return null;
         }
@@ -107,7 +106,8 @@ public class CanvasController : MonoBehaviour {
         if (!long.TryParse(inputFieldLength.text, NumberStyles.Float, CultureInfo.InvariantCulture, out var len) ||
             !float.TryParse(inputFieldMin.text, NumberStyles.Float, CultureInfo.InvariantCulture, out var min) ||
             !float.TryParse(inputFieldMax.text, NumberStyles.Float, CultureInfo.InvariantCulture, out var max) ||
-            min >= max) {
+            min >= max ||
+            len <= 0) {
             RaiseAndShowError(INPUT_ERROR_MESSAGE);
             return;
         }

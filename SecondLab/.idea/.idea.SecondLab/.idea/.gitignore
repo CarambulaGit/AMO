@@ -1,0 +1,11 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.SecondLab.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../:\Users\Carambula\Desktop\Учёба\АМО\SecondLab\.idea\.idea.SecondLab\.idea/dataSources/
+/dataSources.local.xml

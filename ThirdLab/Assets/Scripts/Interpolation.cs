@@ -29,14 +29,14 @@ public class Interpolation {
         float[] xArray = ValuesInInterval(leftBorder, rightBorder, degree);
         float[] yArray = new float[xArray.Length];
         for (int i = 0; i < xArray.Length; i++) {
-            yArray[i] = 3 * Mathf.Pow(Mathf.Cos(xArray[i]), 2) - Mathf.Sqrt(xArray[i]);
+            yArray[i] = Mathf.Exp(-(xArray[i] + Mathf.Sin(xArray[i])));
         }
 
         float xValue = leftBorder;
         float step = 0.01f;
         while (xValue < rightBorder) {
             float interpolatedValue = Interpolate(xArray, yArray, xValue);
-            float analyticValue = 3 * Mathf.Pow(Mathf.Cos(xValue), 2) - Mathf.Sqrt(xValue);
+            float analyticValue = Mathf.Exp(-(xValue + Mathf.Sin(xValue)));
             ui.AddEntryToMainPlot(0, new Vector2(xValue, interpolatedValue), CanvasController.instance.myFuncPlot);
             ui.AddEntryToMainPlot(1, new Vector2(xValue, analyticValue), CanvasController.instance.myFuncPlot);
             xValue += step;
@@ -83,6 +83,15 @@ public class Interpolation {
             float xValue = leftBorder;
             float step = 0.01f;
             while (xValue < rightBorder) {
+                if (xValue > 3 && xValue < 3.01) {
+                    var deltaN = Interpolate(xArrays[i], yArrays[i], xValue) -
+                                 Interpolate(xArrays[i + 1], yArrays[i + 1], xValue);
+                    var deltaExactN = Interpolate(xArrays[i], yArrays[i], xValue) -
+                                      Mathf.Exp(-(xValue + Mathf.Sin(xValue)));
+                    var k = 1 - (deltaExactN / deltaN);
+                    Debug.Log($"deltaN = {deltaN}, deltaExactN = {deltaExactN}, k = {k}");
+                }
+
                 float yValue = Mathf.Abs(Interpolate(xArrays[i], yArrays[i], xValue) -
                                          Interpolate(xArrays[i + 1], yArrays[i + 1], xValue));
                 ui.AddEntryToErrorPlot(i, new Vector2(xValue, yValue), CanvasController.instance.myFuncErrorPlot);
